@@ -20,31 +20,31 @@ import zipkin2.reporter.Reporter;
 @SpringBootApplication
 public class HelloServiceApplication {
 
-	private static final Log logger = LogFactory.getLog(HelloServiceApplication.class);
+    private static final Log logger = LogFactory.getLog(HelloServiceApplication.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(HelloServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(HelloServiceApplication.class, args);
+    }
 
-	@Bean
-	public GrpcTracing grpcTracing(Tracing tracing) {
-		return GrpcTracing.create(tracing);
-	}
+    @Bean
+    public GrpcTracing grpcTracing(Tracing tracing) {
+        return GrpcTracing.create(tracing);
+    }
 
-	@Bean
-	@GrpcGlobalServerInterceptor
-	ServerInterceptor grpcServerInterceptor(GrpcTracing grpcTracing) {
-		return grpcTracing.newServerInterceptor();
-	}
+    @Bean
+    @GrpcGlobalServerInterceptor
+    ServerInterceptor grpcServerInterceptor(GrpcTracing grpcTracing) {
+        return grpcTracing.newServerInterceptor();
+    }
 
-	@Bean
-	@ConditionalOnProperty(value = "sample.zipkin.enabled", havingValue = "false")
-	public Reporter<Span> spanReporter() {
-		return new Reporter<Span>() {
-			@Override
-			public void report(Span span) {
-				logger.info(span);
-			}
-		};
-	}
+    @Bean
+    @ConditionalOnProperty(value = "sample.zipkin.enabled", havingValue = "false")
+    public Reporter<Span> spanReporter() {
+        return new Reporter<Span>() {
+            @Override
+            public void report(Span span) {
+                logger.info(span);
+            }
+        };
+    }
 }

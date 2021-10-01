@@ -14,16 +14,16 @@ import org.apache.commons.logging.LogFactory;
 @GrpcService
 public class HelloServiceImpl extends HelloWorldGrpc.HelloWorldImplBase {
 
-	private static final Log logger = LogFactory.getLog(HelloServiceImpl.class);
+    private static final Log logger = LogFactory.getLog(HelloServiceImpl.class);
 
-	@Override
-	public void sayHello(HelloWorldService.HelloRequest request, StreamObserver<HelloWorldService.HelloResponse> responseObserver) {
-		HelloWorldService.HelloResponse response = HelloWorldService.HelloResponse
-				.newBuilder()
-				.setMessage(String.format("Hello, %s. This message comes from gRPC.", request.getName()))
-				.build();
-		logger.info("Client Message Received：" + request.getName());
-		responseObserver.onNext(response);
-		responseObserver.onCompleted();
-	}
+    @Override
+    public void sayHello(HelloWorldService.HelloRequest request, StreamObserver<HelloWorldService.HelloResponse> responseObserver) {
+        HelloWorldService.HelloResponse response = HelloWorldService.HelloResponse
+                .newBuilder()
+                .setMessage(String.format("Hello, %s. This message comes from gRPC.", request.getName()))
+                .build();
+        logger.info("Client Message Received：" + request.getName());
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
 }

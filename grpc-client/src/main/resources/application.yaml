@@ -16,5 +16,5 @@ sample:
 grpc:
   client:
     grpc-server:
-      address: static://${server-host}:${server-port}
+      address: static://172.21.250.104:18888
       negotiationType: plaintext

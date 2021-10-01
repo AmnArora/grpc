@@ -14,13 +14,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class HelloGrpcClient {
 
-	@GrpcClient("grpc-server")
-	private HelloWorldGrpc.HelloWorldBlockingStub stub;
+    private final Logger logger = LoggerFactory.getLogger(HelloGrpcClient.class);
+    @GrpcClient("grpc-server")
+    private HelloWorldGrpc.HelloWorldBlockingStub stub;
 
-	private final Logger logger = LoggerFactory.getLogger(HelloGrpcClient.class);
-
-	public HelloWorldService.HelloResponse sayHello(HelloWorldService.HelloRequest request) {
-		logger.info("In grpc client.");
-		return stub.sayHello(request);
-	}
+    public HelloWorldService.HelloResponse sayHello(HelloWorldService.HelloRequest request) {
+        logger.info("In grpc client.");
+        return stub.sayHello(request);
+    }
 }

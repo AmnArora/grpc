@@ -14,23 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-	private final HelloGrpcClient helloGrpcClient;
+    private final HelloGrpcClient helloGrpcClient;
 
-	private final Logger logger = LoggerFactory.getLogger(HelloController.class);
+    private final Logger logger = LoggerFactory.getLogger(HelloController.class);
 
-	public HelloController(HelloGrpcClient helloGrpcClient) {
-		this.helloGrpcClient = helloGrpcClient;
-	}
+    public HelloController(HelloGrpcClient helloGrpcClient) {
+        this.helloGrpcClient = helloGrpcClient;
+    }
 
-	@GetMapping("/hello")
-	public String hello(@RequestParam(name = "name", defaultValue = "Aman", required = false) String name) {
-		HelloWorldService.HelloRequest request = HelloWorldService.HelloRequest
-				.newBuilder()
-				.setName(name)
-				.build();
+    @GetMapping("/hello")
+    public String hello(@RequestParam(name = "name", defaultValue = "Aman", required = false) String name) {
+        HelloWorldService.HelloRequest request = HelloWorldService.HelloRequest
+                .newBuilder()
+                .setName(name)
+                .build();
 
-		HelloWorldService.HelloResponse response = helloGrpcClient.sayHello(request);
-		logger.info("Server response received: "+ response.getMessage());
-		return response.getMessage();
-	}
+        HelloWorldService.HelloResponse response = helloGrpcClient.sayHello(request);
+        logger.info("Server response received: " + response.getMessage());
+        return response.getMessage();
+    }
 }
