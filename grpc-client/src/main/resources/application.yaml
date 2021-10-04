@@ -18,3 +18,5 @@ grpc:
     grpc-server:
       address: static://172.21.250.104:18888
       negotiationType: plaintext
+
+    port: 9777
